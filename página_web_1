@@ -1,0 +1,54 @@
+from flask import Flask
+import random
+facts_list= ["La mayoría de las personas que sufren adicción tecnológica experimentan un fuerte estrés cuando se encuentran fuera del área de cobertura de la red o no pueden utilizar sus dispositivos.","Según un estudio realizado en 2018, más del 50% de las personas de entre 18 y 34 años se consideran dependientes de sus smartphones.","El estudio de la dependencia tecnológica es una de las áreas más relevantes de la investigación científica moderna.","Según un estudio de 2019, más del 60% de las personas responden a mensajes de trabajo en sus smartphones en los 15 minutos siguientes a salir del trabajo.","Una forma de combatir la dependencia tecnológica es buscar actividades que aporten placer y mejoren el estado de ánimo.","Elon Musk afirma que las redes sociales están diseñadas para mantenernos dentro de la plataforma, para que pasemos el mayor tiempo posible viendo contenidos.","Elon Musk también aboga por la regulación de las redes sociales y la protección de los datos personales de los usuarios. Afirma que las redes sociales recopilan una enorme cantidad de información sobre nosotros, que luego puede utilizarse para manipular nuestros pensamientos y comportamientos.","Las redes sociales tienen aspectos positivos y negativos, y debemos ser conscientes de ambos cuando utilicemos estas plataformas."]
+app = Flask(__name__)
+
+#@app.route("/")
+#def hello_world():
+#    return f'<p>{random.choice(facts_list)}</p>'
+#app.run(debug=True)
+
+@app.route("/")
+def index():
+    # Página de inicio con enlace a la página secreta
+    return """
+    <h1>El problemón tecnológico</h1>
+    <p>Hoy en día exisen varias problemáticas como el terrorismos, violencia, contaminación e incluso cosas peores; por eso en está página web he puesto información sobre una de estos terribles problemas que no estamos ni cerca de resolver: La adicción a la tecnología(16/11/2024).</p> 
+    <p>Si desea ver dicha información, aquí abajo hay un enlace para que pueda informarse(además de otros dos).</p>
+    <a href="/random_fact">¡Ver un hecho al azar!</a>
+    <a href="/RUTA">¿Porqué debería saber sobre esta situación?</a>
+    <a href="/RUTA3">Generador de contraseñas</a>
+    """
+@app.route("/random_fact")
+def random_fact():
+    # Muestra un hecho aleatorio cada vez que se carga la página
+    fact = random.choice(facts_list)
+    return f"""
+    <h1>Hecho Aleatorio sobre Dependencias Tecnológicas</h1>
+    <p>Aquí abajo, cada vez que presione el enlace que lo llevó a esta parte del sitio web, encontrará una información aleatoria de una lista en el programa. Como parece que quiere saber más, puede volver a la página principal para precionar el enlace de nuevo y de seguro obtendrá otro dato.</p>
+    <p>{fact}</p>
+    <a href="/">Volver a la página principal</a>
+    """
+@app.route("/RUTA")
+def por():
+    return f"""
+    <h1>¿Porqué debería saber sobre esta situación?</h1>
+    <p>Bueno, entiendo que este tema le dé flojera o simplemente no tiene tiempo para informarse de esta clase de cosas. Pero tengo que decirle que debe saber sobre esta adicción debido a que este problema no es ningún chiste o cosa sin importancia, sino una situación que literalmente puede comvertir a cualquier persona sin la voluntad y apoyo suficiente en un donadie vago que no cumplió lo que quería lograr en la vida o incluso en un bagabundo. Eso significa que, si seguimos así, seremos unos zombies que solo les importa unas pantallas que estarán a merced del gobierno.</p>
+    <a href="/">Volver a la página principal</a>
+    """
+@app.route("/RUTA3")
+def generación():
+    contraseña=[]
+    probable=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '#', '$', '%', '&', '/', '!', '+', '-', '*', '<', '>']
+    for i in range(10):
+        b = len(probable) - 1
+        a=random.randint(0,b)
+        contraseña += probable[a]
+    return f"""
+    <h1>Generador de contraseñas</h1>
+    <p>Parece que le gustaría o necesita una contraseña para proteger su dispositivo. ¡Está de suerte! Aquí abajo hay una contraseña(con otras cosas) que cambia cada vez que accede a esta parte que puede usar.</p>
+    <p>{contraseña}</p>
+    <a href="/">Volver a la página principal</a>
+    """
+if __name__ == "__main__":
+    app.run(debug=True)
